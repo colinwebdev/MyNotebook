@@ -1,0 +1,335 @@
+@use 'sass:color';
+@import url('https://fonts.googleapis.com/css2?family=Cutive+Mono&family=Russo+One&display=swap');
+
+$baseMid: hsl(210, 13%, 50%);
+$baseDark: #454955;
+$black: #121418;
+$baseLighter: #e8ebf7;
+
+$accent1: #BCED09;
+$accent2: #0FA3B1;
+$accent3: #ff715b;
+
+$headerFont: 'Russo One', sans-serif;
+$mainFont: 'Cutive Mono', monospace;
+
+$corners: 30px;
+$pillCorners: 1000px;
+$bgSize: 4px;
+$borders: 3px solid $black;
+$thickShadows: 1px 1px $black, 2px 2px $black, 4px 4px $black, 6px 6px $black, 
+8px 8px $black, 10px 10px $black, 12px 12px $black;
+$thinShadows: 5px 5px $black;
+$pressedShadows: 2px 2px $baseDark;
+
+@mixin hoverShadow {
+    border: 2px solid $black;
+    box-shadow: $thinShadows;
+    &:hover {
+        cursor: pointer;
+        box-shadow: $pressedShadows;
+        transform: translateX(2px) translateY(2px);
+    }
+}
+
+* {
+    box-sizing: border-box;
+    padding: 0;
+    margin: 0;
+}
+
+body {
+    font-family: $mainFont;
+    width: 90vw;
+    height: 90vh;
+    font-size: 16px;
+    margin: 3vh auto;
+    overflow: hidden;
+    background-color: $baseDark;
+    background-image: linear-gradient(45deg, $baseMid 25%, transparent 25%), 
+        linear-gradient(-45deg, $baseMid 25%, transparent 25%), 
+        linear-gradient(45deg, transparent 75%, $baseMid 75%), 
+        linear-gradient(-45deg, transparent 75%, $baseMid 75%);
+    background-size: $bgSize $bgSize;
+    background-position: 0 0, 0 calc($bgSize/2), 
+        calc($bgSize/2) calc($bgSize/2 * -1), calc($bgSize/2 * -1) 0px;
+}
+
+h1 {
+    font-family: $headerFont;
+    font-size: 3.5rem;
+    text-shadow: $thickShadows;
+    text-transform: uppercase;
+    color: $accent1;
+}
+
+h2, h3, h4, h5, h6 {
+    font-family: $headerFont;
+}
+
+button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 1.25rem;
+    border-radius: $pillCorners;
+    font-weight: bold;
+    text-transform: uppercase;
+    @include hoverShadow();
+}
+
+.input {
+    background-color: rgba($accent1, .7);
+    position: absolute;
+    width: 100vw;
+    height: 100vh;
+    top: 50%;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%);
+    padding: 2rem;
+    display: flex;
+    flex-direction: column;
+    #close {
+        align-self: flex-end;
+    }
+    .saveButton {
+        background-color: $accent1;
+    }
+    .clearButton {
+        background-color: $accent2;
+    }
+    form {
+        width: 80%;
+        height: 83%;
+        margin: 0 auto;
+        background-color: $accent2;
+        display: flex;
+        flex-direction: column;
+        padding: 2rem;
+        border-radius: $corners;
+        border: $borders;
+        box-shadow: $thickShadows;
+        label {
+            font-size: 2rem;
+            font-family: $headerFont;
+        }
+        textarea {
+            flex-grow: 1;
+            margin-bottom: 1rem;
+            border-radius: $corners;
+            padding: 1rem;
+            resize: none;
+            border: $borders;
+            outline: none;
+            box-shadow: 0 5px $black;
+            &:focus {
+                border-color: $accent1;
+            }
+        }
+    }
+}
+
+a {
+    color: $accent2;
+    text-shadow: 2px 2px $black, 5px 5px $black;
+    &:hover {
+        cursor: pointer;
+        text-shadow: 3px 3px $baseDark;
+        transform: translateX(2px) translateY(2px);
+    }
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-between;
+    width: 85%;
+    margin: 0 auto;
+}
+
+main {
+    display: flex;
+    flex-direction: column;
+    min-height: 70vh;
+    max-height: 85vh;
+    .postButtons {
+        display: flex;
+        gap: 1rem;
+    }
+    button {
+        width: fit-content;
+        justify-self: end;
+        &.clearAll {
+            background-color: $accent2;
+            border-color: color.adjust($accent2, $lightness: -25%);
+            border-radius: $pillCorners;
+        }
+        &.newPost {
+            background-color: $accent1;
+            border-color: color.adjust($accent1, $lightness: -30%);
+        }
+    }
+}
+
+footer {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    margin: 0 2rem;
+    border: $borders;
+    border-radius: $corners;
+    background-color: $accent2;
+    box-shadow: $thickShadows;
+    div {
+        padding: 1rem 2rem 1.5rem 2rem;
+    }
+}
+
+#output {
+    flex-grow: 1;
+    border: $borders;
+    margin: 2rem;
+    border-radius: $corners;
+    overflow-y: scroll;
+    background-color: rgba($baseLighter, .5);
+    box-shadow: $thickShadows;
+    .outputLink {
+        border-right: 2px solid $accent2;
+        padding: 1rem;
+        display: flex;
+        flex-wrap: wrap;
+        gap: .5rem;
+        max-width: 45%;
+    }
+    .textContain {
+        padding: 1rem;
+    }
+    .box {
+        border-radius: calc($corners/2);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background-color: $baseLighter;
+        border: $borders;
+        margin: 1rem;
+        .content {
+            display: flex;
+            i {
+                font-size: 6rem;
+            }
+            a.displayLink {
+                width: 200px;
+                height: 200px;
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                text-decoration: none;
+            }
+            img {
+                max-width: 200px;
+                max-height: 200px;
+                border-radius: 20px;
+                @include hoverShadow();
+            }
+        }
+        p {
+            padding: .5rem;
+        }
+        .boxFooter {
+            display: flex;
+            justify-content: space-between;
+            border-top: 2px solid $accent2;
+            padding: .5rem 1rem .75rem 1rem;
+            i {
+                border-radius: $pillCorners;
+                padding: .5rem;
+                background-color: $accent2;
+                @include hoverShadow();
+            }
+        }
+        
+    }
+    &::-webkit-scrollbar {
+        width: 3rem;
+        border-radius: 0 calc($corners - 1px) calc($corners - 1px) 0;
+        background-color: $accent1;
+        outline: 3px solid $black;
+    }
+    &::-webkit-scrollbar-track {
+        width: 3rem;
+        margin: 3px;
+    }
+    &::-webkit-scrollbar-thumb {
+        background-color: black;
+        border-radius: $pillCorners;
+        border: 10px solid $accent1;
+    }
+}
+
+.instructions {
+    position: absolute;
+    height: 100vh;
+    width: 100vw;
+    top: 0;
+    right: 0;
+    display: flex;
+    justify-content: center;
+    padding-top: 10vh;
+    padding-bottom: 10vh;
+    background-color: rgba($accent3, 0.8);
+    .textWrap {
+        background-color: $baseLighter;
+        padding: 2rem;
+        max-width: 70%;
+        border-radius: $corners;
+        border: $borders;
+        box-shadow: $thinShadows;
+        p {
+            padding: 1rem .5rem;
+        }
+        i {
+            border-radius: $pillCorners;
+            padding: .5rem;
+            background-color: $accent2;
+            border: 2px solid $black;
+            box-shadow: $thinShadows;
+        }
+    }
+}
+
+.instruct {
+    border-radius: $pillCorners;
+    height: 80px;
+    width: 80px;
+    font-size: 2rem;
+    background-color: $accent3;
+    border: 5px solid color.adjust($accent3, $saturation: -16%, $lightness: -35%);
+}
+
+header {
+    display: flex;
+    justify-content: space-between;
+    margin: 0 2rem;
+}
+
+.shield {
+    height: 100vh;
+    width: 100vw;
+    position: absolute;
+    top: 0;
+    left: 0;
+    background-color: rgba($accent2, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    img {
+        max-height: 90vh;
+        max-width: 90vw;
+        box-shadow: $thickShadows;
+        border-radius: $corners;
+        outline: 3px solid $black;
+    }
+}
+
+.hide {
+    display: none;
+}

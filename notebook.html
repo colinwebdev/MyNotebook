@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://kit.fontawesome.com/375d969cd5.js" crossorigin="anonymous"></script>
+    <script defer src="js/script.js"></script>
+    <link rel="stylesheet" href="css/style.css">
+    <title>Coding Challenge 13</title>
+</head>
+
+<body>
+    <header>
+        <h1>My Notebook</h1>
+        <button class="instruct" onclick="instructions()" aria-label="Get information"><i class="fa-solid fa-question infobutton"></i></button>
+    </header>
+    <main>
+        <!-- Box to contain entries -->
+        <div id="output">
+
+        </div>
+        <footer>
+            <div class="postButtons">
+                <button onclick="clearAll()" class="clearAll">Clear all</button>
+                <button onclick="showInput()" class="newPost">New Post</button>
+            </div>
+        </footer>
+    </main>
+
+<!-- Box to show input form -->
+    <div class="hide input">
+        <button id="close" onclick="closeInput()">Close</button>
+        <form>
+            <label for="inputBox">Make a Note</label>
+            <textarea name="inputBox" id="inputBox"></textarea>
+            <div class="buttons">
+                <button class="clearButton">Clear</button>
+                <button class="saveButton">Save</button>
+            </div>
+        </form>
+    </div>
+
+    <!-- Box to show instructions -->
+    <div class="instructions hide">
+        <div class="textWrap">
+            <h2>Instructions</h2>
+            <div class="text">
+                <p>
+                    This is a simple little page that uses your browser's cache to store information. Nothing is sent the server, and only you can access what's stored here.
+                </p>
+                <p>
+                    The form accepts 3 different types of input: images via URL, links, and text input.
+                </p>
+                <p>
+                    To include an image or link, just paste the URL into the input box and the page takes care of the rest. You may include additional text with your link or image, but all images will be stored together regardless of where they are added in the text.
+                </p>
+                <p>
+                    For text, you can type in as much or as little as you want. But only plain text can be used, no HTML is allowed.
+                </p>
+                <p>
+                    Use the delete button <i class="fa-solid fa-minus instructicon"></i> on the item's card to remove the item, or use the edit button <i class="fa-solid fa-pencil instructicon"></i> to make changes.
+                </p>
+                <p>
+                    If you want to wipe all information, use the "Clear All" button at the bottom of the page. This will remove all cards.
+                </p>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
